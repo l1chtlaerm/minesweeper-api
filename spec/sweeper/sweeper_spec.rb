@@ -30,8 +30,12 @@ RSpec.describe 'Test suite', type: :request do
     expect(json.join('')).not_to match(/[^\s\d\+\-|\\*]/)
   end
 
-  # create a controller method that resolves minesweeper
-  it 'resolves minesweeper successfully and sends to API URL' do
+  # posts API to rails server
+  it 'sends unsolved minesweeper to API URL' do
+    get('/api/v1/sweepers')
+    json = JSON.parse(response.body)
+    expect(json["problem"].length).to eql(json["problem"][0].length)
   end
+  # create a controller method that resolves minesweeper
   # send solved array and original array converted as JSON to Heroku API
 end
