@@ -4,4 +4,5 @@ Rails.application.routes.draw do
       resources :sweepers, only: [:index]
     end
   end
+  root to: 'api/v1/sweepers#index', defaults: { format: :json }
 end
