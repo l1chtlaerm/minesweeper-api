@@ -2,11 +2,8 @@ require 'rails_helper'
 require 'open-uri'
 
 RSpec.describe 'Test suite', type: :request do
-
+  include SweeperHelper
   # retrieves JSON from API and converts to a valid array
-  SWEEPER_API = 'https://mine-sweeper-generator.herokuapp.com/solver'.freeze
-  json = JSON.parse(URI.open(SWEEPER_API).read)
-
   problem = [['+', '-', '-', '-', '-', '-', '+'],
              ['|', '*', '*', '*', '*', '*', '|'],
              ['|', '*', ' ', '*', '*', ' ', '|'],
@@ -23,10 +20,12 @@ RSpec.describe 'Test suite', type: :request do
               ['+', '-', '-', '-', '-', '-', '+']]
 
   it 'retrieves valid minesweeper matrix from API endpoint' do
+    json = api_retrieval
     expect(json.length).to eql(json[0].length)
   end
 
   it 'verifies minesweeper does not have invalid chars' do
+    json = api_retrieval
     expect(json.join('')).not_to match(/[^\s\d\+\-|\\*]/)
   end
 
