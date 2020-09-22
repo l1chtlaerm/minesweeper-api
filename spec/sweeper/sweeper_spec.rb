@@ -33,8 +33,8 @@ RSpec.describe 'Test suite', type: :request do
   # posts API to rails server
   it 'sends unsolved minesweeper to API URL' do
     get('/api/v1/sweepers')
-    json = JSON.parse(response.body)
-    expect(json["problem"].length).to eql(json["problem"][0].length)
+    local_json = JSON.parse(response.body)
+    expect(local_json['problem'].length).to eql(local_json['problem'][0].length)
   end
   # create a controller method that resolves minesweeper
   # send solved array and original array converted as JSON to Heroku API
