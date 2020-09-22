@@ -6,5 +6,6 @@ class Api::V1::SweepersController < Api::V1::BaseController
   include SweeperHelper
   def index
     @problem = api_retrieval
+    @solution = solver(@problem)
   end
 end

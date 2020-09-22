@@ -13,18 +13,17 @@ RSpec.describe 'Request suite', type: :request do
     expect(sweeper_content_valid?(api_retrieval)).to eql(true)
   end
 
-  # posts API to rails server
+  # Posts API to rails server
   it 'Sends unsolved minesweeper to API URL' do
     get('/api/v1/sweepers')
     local_json = JSON.parse(response.body)
     expect(sweeper_length_valid?(local_json['problem'])).to eql(true)
   end
-  # send solved array and original array converted as JSON to Heroku API
-  it 'Sends both solved and unsolved minesweepers to Heroku root URL' do
+
+  # Send solved array and original array converted as JSON to Heroku API and
+  it 'Send minesweepers to Heroku root URL and checks that they are correct' do
     get('/')
     local_json = JSON.parse(response.body)
-    expect(sweeper_length_valid?(local_json['problem'])).to eql(true)
-    expect(sweeper_length_valid?(local_json['solution'])).to eql(true)
     expect(solver(local_json['problem'])).to eql(local_json['solution'])
   end
 end
