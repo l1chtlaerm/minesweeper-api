@@ -19,21 +19,19 @@ RSpec.describe 'Test suite', type: :request do
               ['|', '*', '*', '*', '4', '2', '|'],
               ['+', '-', '-', '-', '-', '-', '+']]
 
-  it 'retrieves valid minesweeper matrix from API endpoint' do
-    json = api_retrieval
-    expect(json.length).to eql(json[0].length)
+  it 'retrieves valid minesweeper matrix size from API endpoint' do
+    expect(sweeper_length_valid?(api_retrieval)).to eql(true)
   end
 
   it 'verifies minesweeper does not have invalid chars' do
-    json = api_retrieval
-    expect(json.join('')).not_to match(/[^\s\d\+\-|\\*]/)
+    expect(sweeper_content_valid?(api_retrieval)).to eql(true)
   end
 
   # posts API to rails server
   it 'sends unsolved minesweeper to API URL' do
     get('/api/v1/sweepers')
     local_json = JSON.parse(response.body)
-    expect(local_json['problem'].length).to eql(local_json['problem'][0].length)
+    expect(sweeper_length_valid?(local_json['problem'])).to eql(true)
   end
   # create a controller method that resolves minesweeper
   # send solved array and original array converted as JSON to Heroku API
