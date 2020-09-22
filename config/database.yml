@@ -22,4 +22,4 @@ test:
 
 production:
   <<: *default
-  database: db/minesweeper-api_test_production
+  database: db/minesweeper-api_production
