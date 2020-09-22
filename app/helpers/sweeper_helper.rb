@@ -17,4 +17,25 @@ module SweeperHelper
   def sweeper_content_valid?(sweeper)
     !sweeper.join('').match(/[^\s\d\+\-|\\*]/)
   end
+
+  def solver(array)
+    response = array.map.with_index do |line, index_superior|
+      line.map.with_index do |field, index_inferior|
+        if field == " "
+          counter = 0
+          array[index_superior - 1][index_inferior - 1] == '*' ? counter += 1 : counter
+          array[index_superior - 1][index_inferior] == '*' ? counter += 1 : counter
+          array[index_superior - 1][index_inferior + 1] == '*' ? counter += 1 : counter
+          array[index_superior][index_inferior - 1] == '*' ? counter += 1 : counter
+          array[index_superior][index_inferior + 1] == '*' ? counter += 1 : counter
+          array[index_superior + 1][index_inferior - 1] == '*' ? counter += 1 : counter
+          array[index_superior + 1][index_inferior] == '*' ? counter += 1 : counter
+          array[index_superior + 1][index_inferior + 1] == '*' ? counter += 1 : counter
+          field = counter.to_s
+        end
+        field
+      end
+    end
+    response
+  end
 end
