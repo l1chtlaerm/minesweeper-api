@@ -1,24 +1,22 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is a simple Minesweeper solver. It takes a JSON provided from https://mine-sweeper-generator.herokuapp.com/solver and posts both the problem and the solution to a Heroku deployed API on https://minesweeper-boogaloo.herokuapp.com/.
 
-Things you may want to cover:
+An example of a problem/solution array pair:
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+`  problem = [['+', '-', '-', '-', '-', '-', '+'],
+             ['|', '*', '*', '*', '*', '*', '|'],
+             ['|', '*', ' ', '*', '*', ' ', '|'],
+             ['|', ' ', ' ', ' ', '*', ' ', '|'],
+             ['|', '*', ' ', '*', '*', '*', '|'],
+             ['|', '*', '*', '*', ' ', ' ', '|'],
+             ['+', '-', '-', '-', '-', '-', '+']]
+             
+  solution = [['+', '-', '-', '-', '-', '-', '+'],
+              ['|', '*', '*', '*', '*', '*', '|'],
+              ['|', '*', '5', '*', '*', '4', '|'],
+              ['|', '2', '4', '5', '*', '4', '|'],
+              ['|', '*', '5', '*', '*', '*', '|'],
+              ['|', '*', '*', '*', '4', '2', '|'],
+              ['+', '-', '-', '-', '-', '-', '+']]
+`
