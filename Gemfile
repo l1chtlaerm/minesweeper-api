@@ -7,10 +7,10 @@ gem 'bootsnap', '>= 1.4.2', require: false
 gem 'jbuilder'
 gem 'puma', '~> 4.1'
 gem 'rails', '~> 6.0.3', '>= 6.0.3.3'
+gem 'rspec-rails'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-  gem 'rspec-rails'
 end
 
 group :development do
