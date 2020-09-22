@@ -22,43 +22,22 @@ module SweeperHelper
     !sweeper.join('').match(/[^\s\d\+\-|\\*]/)
   end
 
-  # def solver(array)
-  #   return [] if array.nil?
-
-  #   response = array.map.with_index do |line, index_superior|
-  #     line.map.with_index do |field, index_inferior|
-  #       if field == ' '
-  #         counter = 0
-  #         array[index_superior - 1][index_inferior - 1] == '*' ? counter += 1 : counter
-  #         array[index_superior - 1][index_inferior] == '*' ? counter += 1 : counter
-  #         array[index_superior - 1][index_inferior + 1] == '*' ? counter += 1 : counter
-  #         array[index_superior][index_inferior - 1] == '*' ? counter += 1 : counter
-  #         array[index_superior][index_inferior + 1] == '*' ? counter += 1 : counter
-  #         array[index_superior + 1][index_inferior - 1] == '*' ? counter += 1 : counter
-  #         array[index_superior + 1][index_inferior] == '*' ? counter += 1 : counter
-  #         array[index_superior + 1][index_inferior + 1] == '*' ? counter += 1 : counter
-  #         field = counter.to_s
-  #       end
-  #       field
-  #     end
-  #   end
-  #   response
-  # end
-
   def solver(array)
-    return [] if array.nil?
-
-    array.map.with_index do |line, s|
-      line.map.with_index do |field, i|
-        if field == ' '
-          c = 0
-          [-1, 0, 1].product([-1, 0, 1]).each do |coordinate|
-            array[s + coordinate[0]][i + coordinate[1]] == '*' ? c += 1 : c
-          end
-          field = c.to_s
-        end
-        field
+    array.map.with_index do |line, superior|
+      line.map.with_index do |f, inferior|
+        f == ' ' ? counter = coordinates_counter(superior, inferior, array) : f
+        f.match(/[\+\-|\\*]/) ? f : counter.to_s
       end
     end
+  end
+
+  # Separated method to reduce solver complexity, to DRY and to be more explicit
+  # with variable names (80 character length rubocop limit)
+  def coordinates_counter(superior, inferior, array)
+    counter = 0
+    [-1, 0, 1].product([-1, 0, 1]).each do |x|
+      array[superior + x[0]][inferior + x[1]] == '*' ? counter += 1 : counter
+    end
+    counter
   end
 end
