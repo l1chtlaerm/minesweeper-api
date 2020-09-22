@@ -5,6 +5,8 @@ module SweeperHelper
 
   def api_retrieval
     json = JSON.parse(URI.open(SWEEPER_API).read)
+    return [] if json.nil?
+
     sweeper_length_valid?(json) && sweeper_content_valid?(json) ? json : []
   end
 
