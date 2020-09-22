@@ -26,7 +26,7 @@ module SweeperHelper
     array.map.with_index do |line, superior|
       line.map.with_index do |field, inferior|
         field == ' ' ? counter = mine_counter(superior, inferior, array) : field
-        field.match(/[\+\-|\\*]/) ? f : counter.to_s
+        field.match(/[\+\-|\\*]/) ? field : counter.to_s
       end
     end
   end
