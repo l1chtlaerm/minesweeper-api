@@ -1,3 +1,7 @@
+# frozen_string_literal: false
+
+# SweeperHelper module - to keep methods outside of the controller and easier
+# testing.
 module SweeperHelper
   require 'open-uri'
   require 'json'
