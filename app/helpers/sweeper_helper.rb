@@ -48,19 +48,17 @@ module SweeperHelper
   def solver(array)
     return [] if array.nil?
 
-    response = array.map.with_index do |line, index_superior|
-      line.map.with_index do |field, index_inferior|
+    array.map.with_index do |line, s|
+      line.map.with_index do |field, i|
         if field == ' '
-          counter = 0
-          coordinate_array = [[1, 0], [-1, 0], [0, 1], [0, -1], [1, 1], [1, -1], [-1, 1], [-1, -1]]
-          coordinate_array.each do |coordinate|
-            array[index_superior + coordinate[0]][index_inferior + coordinate[1]] == '*' ? counter += 1 : counter
+          c = 0
+          [-1, 0, 1].product([-1, 0, 1]).each do |coordinate|
+            array[s + coordinate[0]][i + coordinate[1]] == '*' ? c += 1 : c
           end
-          field = counter.to_s
+          field = c.to_s
         end
         field
       end
     end
-    response
   end
 end
