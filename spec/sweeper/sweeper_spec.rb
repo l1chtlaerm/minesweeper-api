@@ -34,5 +34,9 @@ RSpec.describe 'Test suite', type: :request do
     expect(sweeper_length_valid?(local_json['problem'])).to eql(true)
   end
   # create a controller method that resolves minesweeper
+
+  it 'solves a valid minesweeper' do
+    expect(solver(problem)).to eql(solution)
+  end
   # send solved array and original array converted as JSON to Heroku API
 end
