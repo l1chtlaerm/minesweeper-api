@@ -18,19 +18,40 @@ module SweeperHelper
     !sweeper.join('').match(/[^\s\d\+\-|\\*]/)
   end
 
+  # def solver(array)
+  #   return [] if array.nil?
+
+  #   response = array.map.with_index do |line, index_superior|
+  #     line.map.with_index do |field, index_inferior|
+  #       if field == ' '
+  #         counter = 0
+  #         array[index_superior - 1][index_inferior - 1] == '*' ? counter += 1 : counter
+  #         array[index_superior - 1][index_inferior] == '*' ? counter += 1 : counter
+  #         array[index_superior - 1][index_inferior + 1] == '*' ? counter += 1 : counter
+  #         array[index_superior][index_inferior - 1] == '*' ? counter += 1 : counter
+  #         array[index_superior][index_inferior + 1] == '*' ? counter += 1 : counter
+  #         array[index_superior + 1][index_inferior - 1] == '*' ? counter += 1 : counter
+  #         array[index_superior + 1][index_inferior] == '*' ? counter += 1 : counter
+  #         array[index_superior + 1][index_inferior + 1] == '*' ? counter += 1 : counter
+  #         field = counter.to_s
+  #       end
+  #       field
+  #     end
+  #   end
+  #   response
+  # end
+
   def solver(array)
+    return [] if array.nil?
+
     response = array.map.with_index do |line, index_superior|
       line.map.with_index do |field, index_inferior|
-        if field == " "
+        if field == ' '
           counter = 0
-          array[index_superior - 1][index_inferior - 1] == '*' ? counter += 1 : counter
-          array[index_superior - 1][index_inferior] == '*' ? counter += 1 : counter
-          array[index_superior - 1][index_inferior + 1] == '*' ? counter += 1 : counter
-          array[index_superior][index_inferior - 1] == '*' ? counter += 1 : counter
-          array[index_superior][index_inferior + 1] == '*' ? counter += 1 : counter
-          array[index_superior + 1][index_inferior - 1] == '*' ? counter += 1 : counter
-          array[index_superior + 1][index_inferior] == '*' ? counter += 1 : counter
-          array[index_superior + 1][index_inferior + 1] == '*' ? counter += 1 : counter
+          coordinate_array = [[1, 0], [-1, 0], [0, 1], [0, -1], [1, 1], [1, -1], [-1, 1], [-1, -1]]
+          coordinate_array.each do |coordinate|
+            array[index_superior + coordinate[0]][index_inferior + coordinate[1]] == '*' ? counter += 1 : counter
+          end
           field = counter.to_s
         end
         field

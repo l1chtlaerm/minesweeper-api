@@ -1,5 +1,4 @@
 require 'rails_helper'
-require 'open-uri'
 
 RSpec.describe 'Test suite', type: :request do
   include SweeperHelper
