@@ -15,6 +15,8 @@ module SweeperHelper
   end
 
   def sweeper_length_valid?(sweeper)
+    return false if sweeper.map(&:length).uniq.length != 1
+
     sweeper.length == sweeper[0].length
   end
 
