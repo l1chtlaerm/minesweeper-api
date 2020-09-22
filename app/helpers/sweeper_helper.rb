@@ -24,16 +24,16 @@ module SweeperHelper
 
   def solver(array)
     array.map.with_index do |line, superior|
-      line.map.with_index do |f, inferior|
-        f == ' ' ? counter = coordinates_counter(superior, inferior, array) : f
-        f.match(/[\+\-|\\*]/) ? f : counter.to_s
+      line.map.with_index do |field, inferior|
+        field == ' ' ? counter = mine_counter(superior, inferior, array) : field
+        field.match(/[\+\-|\\*]/) ? f : counter.to_s
       end
     end
   end
 
   # Separated method to reduce solver complexity, to DRY and to be more explicit
   # with variable names (80 character length rubocop limit)
-  def coordinates_counter(superior, inferior, array)
+  def mine_counter(superior, inferior, array)
     counter = 0
     [-1, 0, 1].product([-1, 0, 1]).each do |x|
       array[superior + x[0]][inferior + x[1]] == '*' ? counter += 1 : counter
